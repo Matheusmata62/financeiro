@@ -1,9 +1,26 @@
 {
-  "buildCommand": "pip install -r requirements.txt",
-  "devCommand": "streamlit run src/dashboard.py",
+  "version": 2,
+  "builds": [
+    {
+      "src": "api/index.py",
+      "use": "@vercel/python"
+    },
+    {
+      "src": "package.json",
+      "use": "@vercel/next"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "api/index.py"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/index.html"
+    }
+  ],
   "env": {
-    "PYTHONUNBUFFERED": "1",
-    "STREAMLIT_SERVER_HEADLESS": "true",
-    "STREAMLIT_SERVER_ENABLE_CORS": "false"
+    "PYTHONUNBUFFERED": "1"
   }
 }

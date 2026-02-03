@@ -1,0 +1,9 @@
+# Streamlit configuration for deployment
+[server]
+headless = true
+port = 8501
+enableCORS = false
+allowRunOnSave = true
+
+[client]
+showErrorDetails = true

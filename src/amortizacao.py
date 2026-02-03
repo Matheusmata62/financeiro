@@ -7,7 +7,7 @@ permitindo tanto redução de prazo quanto redução de parcela.
 """
 
 from dataclasses import dataclass
-from typing import List, Dict, Tuple
+from typing import Optional, List, Dict, Tuple
 from datetime import datetime, timedelta
 from decimal import Decimal, ROUND_HALF_UP
 
@@ -99,7 +99,7 @@ class CalculadoraAmortizacao:
             Decimal('0.01'), rounding=ROUND_HALF_UP
         )
     
-    def gerar_plano_completo(self, aportes: Dict[int, float] = None) -> PlanoAmortizacao:
+    def gerar_plano_completo(self, aportes: Optional[Dict[int, float]] = None) -> PlanoAmortizacao:
         """
         Gera o plano completo de amortização com aportes opcionais
         

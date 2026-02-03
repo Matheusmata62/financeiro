@@ -10,7 +10,7 @@ from datetime import datetime
 # Adiciona src ao path
 sys.path.insert(0, str(Path(__file__).parent.parent / "src"))
 
-from database import GerenciadorBancoDados
+from src.database import GerenciadorBancoDados
 
 
 def test_criar_financiamento():

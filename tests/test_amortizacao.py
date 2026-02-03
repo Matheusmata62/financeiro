@@ -10,7 +10,7 @@ from datetime import datetime
 # Adiciona src ao path
 sys.path.insert(0, str(Path(__file__).parent.parent / "src"))
 
-from amortizacao import CalculadoraAmortizacao, PlanoAmortizacao
+from src.amortizacao import CalculadoraAmortizacao, PlanoAmortizacao
 
 
 def test_calculo_juros():

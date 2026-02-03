@@ -15,7 +15,7 @@ from typing import List, Dict, Optional, Tuple
 from dataclasses import asdict
 from decimal import Decimal
 
-from amortizacao import PlanoAmortizacao, Parcela
+from src.amortizacao import PlanoAmortizacao, Parcela
 
 
 DB_PATH = Path(__file__).parent.parent / "data" / "financiamentos.db"
@@ -114,7 +114,7 @@ class GerenciadorBancoDados:
     
     def criar_financiamento(self, nome: str, saldo_inicial: float, 
                            taxa_mensal: float, parcela_fixa: float,
-                           descricao: str = None) -> int:
+                           descricao: Optional[str] = None) -> int:
         """
         Cria um novo financiamento
         
@@ -186,7 +186,7 @@ class GerenciadorBancoDados:
                               numero_parcela: int, valor_parcela: float,
                               juros: float, principal: float,
                               saldo_anterior: float, saldo_posterior: float,
-                              data_pagamento: datetime = None):
+                              data_pagamento: Optional[datetime] = None):
         """Registra uma parcela como paga"""
         conn = self._conexao()
         cursor = conn.cursor()
@@ -240,7 +240,7 @@ class GerenciadorBancoDados:
     
     def registrar_aporte(self, financiamento_id: int, numero_parcela: int,
                         valor_aporte: float, origem: str = "manual",
-                        descricao: str = None, data_aporte: datetime = None) -> int:
+                        descricao: Optional[str] = None, data_aporte: Optional[datetime] = None) -> int:
         """
         Registra um aporte extra
         
@@ -314,7 +314,7 @@ class GerenciadorBancoDados:
     # ============= ENTRADAS EXTRAS =============
     
     def registrar_entrada_extra(self, financiamento_id: int, valor: float,
-                               descricao: str = None, produto_vendido: str = None,
+                               descricao: Optional[str] = None, produto_vendido: str = None,
                                data_entrada: datetime = None) -> int:
         """
         Registra uma entrada extra (receita de revenda)

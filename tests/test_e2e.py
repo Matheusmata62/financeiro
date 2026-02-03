@@ -13,8 +13,8 @@ os.environ['PYTHONIOENCODING'] = 'utf-8'
 # Adiciona src ao path
 sys.path.insert(0, str(Path(__file__).parent.parent / "src"))
 
-from amortizacao import CalculadoraAmortizacao
-from integracao import SistemaFinanciamento
+from src.amortizacao import CalculadoraAmortizacao
+from src.integracao import SistemaFinanciamento
 
 
 def test_fluxo_completo_usuario():

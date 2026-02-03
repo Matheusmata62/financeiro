@@ -6,18 +6,18 @@ permitindo calcular e salvar planos de amortização completos.
 """
 
 from datetime import datetime
-from typing import Tuple
+from typing import Optional, Tuple
 from decimal import Decimal
 from pathlib import Path
 
-from amortizacao import CalculadoraAmortizacao, PlanoAmortizacao
-from database import GerenciadorBancoDados
+from src.amortizacao import CalculadoraAmortizacao, PlanoAmortizacao
+from src.database import GerenciadorBancoDados
 
 
 class SistemaFinanciamento:
     """Integra cálculo e banco de dados em um sistema coeso"""
     
-    def __init__(self, db_path: Path = None):
+    def __init__(self, db_path: Optional[Path] = None):
         """Inicializa o sistema"""
         if db_path is None:
             db_path = Path(__file__).parent.parent / "data" / "financiamentos.db"
@@ -25,7 +25,7 @@ class SistemaFinanciamento:
     
     def criar_financiamento_completo(self, nome: str, saldo_inicial: float,
                                      taxa_mensal: float, parcela_fixa: float,
-                                     descricao: str = None) -> int:
+                                     descricao: Optional[str] = None) -> int:
         """
         Cria um financiamento no banco de dados
         
@@ -42,7 +42,7 @@ class SistemaFinanciamento:
     
     def adicionar_aporte(self, financiamento_id: int, numero_parcela: int,
                         valor_aporte: float, origem: str = "manual",
-                        descricao: str = None) -> int:
+                        descricao: Optional[str] = None) -> int:
         """Adiciona um aporte ao financiamento"""
         return self.bd.registrar_aporte(
             financiamento_id=financiamento_id,
@@ -126,7 +126,7 @@ class SistemaFinanciamento:
     
     def registrar_venda_e_aporte(self, financiamento_id: int,
                                 valor_venda: float, numero_parcela: int,
-                                descricao: str, produto_vendido: str = None) -> Tuple[int, int]:
+                                descricao: str, produto_vendido: Optional[str] = None) -> Tuple[int, int]:
         """
         Registra uma venda (entrada extra) e a converte em aporte automaticamente
         
